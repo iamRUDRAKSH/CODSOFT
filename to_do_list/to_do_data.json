@@ -2,5 +2,9 @@
     {
         "title": "Task",
         "completed": false
+    },
+    {
+        "title": "Another Task",
+        "completed": false
     }
 ]
