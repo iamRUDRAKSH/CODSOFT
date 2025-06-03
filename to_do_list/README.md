@@ -16,7 +16,8 @@ Easily add, complete, and delete tasks with persistence — even after closing t
 
 ---
 
-## 📸 Working
+## 📸 Screenshots
+![Interface](image.png)
 
 
 ### 🔧 Requirements
