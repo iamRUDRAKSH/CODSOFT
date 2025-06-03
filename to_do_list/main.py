@@ -4,7 +4,7 @@ import tkinter.font as tkfont
 import json
 import os
 
-DATA_FILE = "to_do_data.json"
+DATA_FILE = "to_do_list/to_do_data.json"
 
 # ------------------ Task Persistence ------------------ #
 def load_tasks():
