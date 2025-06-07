@@ -76,13 +76,17 @@ create_checkbox_box("Include Numbers", var2)
 create_checkbox_box("Include Symbols (@ _ !)", var3)
 
 # ------------------ Result Label ------------------ #
-result_label = tk.Label(root, text="", bg=bg_color, fg="#fff", font=("Courier New", 12, "bold"), wraplength=450)
-result_label.pack(pady=20)
+result_entry = tk.Entry(root, font=("Courier New", 12, "bold"), justify="center", readonlybackground="#a97404", fg="white", width=30, border=1.5)
+result_entry.pack(pady=20)
+result_entry.configure(state='readonly')
 
 # ------------------ Button ------------------ #
 def handle_generate():
     pwd = generate_pass(length.get(), var1.get(), var2.get(), var3.get())
-    result_label.config(text=pwd)
+    result_entry.configure(state='normal')
+    result_entry.delete(0, tk.END)
+    result_entry.insert(0, pwd)
+    result_entry.configure(state='readonly')
 
 ttk.Button(root, text="Generate Password", command=handle_generate).pack(pady=10)
 
