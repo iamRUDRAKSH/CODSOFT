@@ -1,32 +1,89 @@
-import random
+import tkinter as tk
+from tkinter import ttk
 import string
+import random
 
-def generate_pass():
+def generate_pass(length, alphabets, numbers, symbols):
     try:
-        length = int(input("No. of characters in the password(4-16): "))
-        if length < 4 or length > 16:
-                print("Length must be between 4 and 16.")
-                return
-        
-        alphabets = input("Should password contain alphabets?(y/n): ")
-        numbers = input("Should password contain numbers?(y/n): ")
-        symbols = input("Should password contain special characters[@,_,!]?(y/n): ")
         characters = ""
 
-        if alphabets == 'y':
+        if alphabets:
             characters += string.ascii_letters
-        if numbers == 'y':
+        if numbers:
             characters += string.digits
-        if symbols == 'y':
+        if symbols:
             characters += '@_!'
-        
+
         if not characters:
-                print("You must select at least one character type.")
-                return
+            return "Select at least one character type!"
 
-        return ''.join(random.choice(characters) for _ in range(length))
+        return ''.join(random.choice(characters) for _ in range(int(length)))
     except ValueError:
-         print("Please enter a valid number.")
+        return "Invalid length!"
 
-password = generate_pass()
-print(f"Generated password: {password}")
+# ------------------ Main Window ------------------ #
+root = tk.Tk()
+root.title("Password Generator")
+root.geometry("500x550")
+root.resizable(False, False)
+bg_color = "#654702"
+fg_color = "white"
+root.configure(bg=bg_color)
+
+# ------------------ Styles ------------------ #
+style = ttk.Style()
+style.theme_use("clam")
+
+style.configure("TLabel", background=bg_color, foreground=fg_color, font=("Helvetica", 11))
+style.configure("TButton", background="#a97404", foreground="white", font=("Helvetica", 11), padding=6)
+style.configure("TCombobox",
+    foreground="black",
+    background="white",
+    fieldbackground="#f5e7c0",
+    selectbackground="#a97404",
+    selectforeground="black",
+    padding=5,
+    font=("Helvetica", 11)
+)
+style.map("TCombobox",
+    fieldbackground=[("readonly", "#f5e7c0")],
+    background=[("readonly", "#f5e7c0")],
+    foreground=[("readonly", "black")]
+)
+
+ttk.Label(root, text="Select length of password (4 to 16):").pack(pady=(20, 5))
+options = list(range(4, 17))
+length = tk.StringVar()
+dropdown = ttk.Combobox(root, textvariable=length, values=options, state="readonly", width=10)
+dropdown.pack(pady=5)
+dropdown.current(0)
+
+checkbox_style = {"bg": "#a97404", "fg": fg_color, "selectcolor": bg_color, "font": ("Helvetica", 12)}
+
+def create_checkbox_box(text, variable):
+    frame = tk.Frame(root, bg="#a97404", bd=2, relief="groove")
+    frame.pack(pady=5, ipadx=10, ipady=5)
+    cb = tk.Checkbutton(frame, text=text, variable=variable, **checkbox_style, width=25, anchor='w', padx=10)
+    cb.pack()
+    return frame
+
+var1 = tk.IntVar()
+var2 = tk.IntVar()
+var3 = tk.IntVar()
+
+create_checkbox_box("Include Alphabets", var1)
+create_checkbox_box("Include Numbers", var2)
+create_checkbox_box("Include Symbols (@ _ !)", var3)
+
+# ------------------ Result Label ------------------ #
+result_label = tk.Label(root, text="", bg=bg_color, fg="#fff", font=("Courier New", 12, "bold"), wraplength=450)
+result_label.pack(pady=20)
+
+# ------------------ Button ------------------ #
+def handle_generate():
+    pwd = generate_pass(length.get(), var1.get(), var2.get(), var3.get())
+    result_label.config(text=pwd)
+
+ttk.Button(root, text="Generate Password", command=handle_generate).pack(pady=10)
+
+root.mainloop()
