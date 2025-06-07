@@ -19,7 +19,6 @@ Easily add, complete, and delete tasks with persistence — even after closing t
 ## 📸 Screenshots
 ![Interface](image.png)
 
-
 ### 🔧 Requirements
 - Python 3.x (Recommended: 3.8+)
 - No external libraries required (only `tkinter`, which is built-in)

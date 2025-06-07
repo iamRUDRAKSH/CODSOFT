@@ -1,3 +1,6 @@
+#FUNCTIONALITIES TO ADD
+#Access from the terminal
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 import tkinter.font as tkfont
