@@ -22,7 +22,7 @@ def calculator():
                 if num1 == 0 and num2 == 0:
                     print("Error: Undefined calculation.")
                     continue
-                ans = num1 ^ num2
+                ans = num1 ** num2
             else:
                 print("Invalid operation choice.")
                 continue
