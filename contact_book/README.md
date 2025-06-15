@@ -29,7 +29,7 @@ This app lets you **store**, **search**, and **delete** contacts easily — all 
 3. Run the script:
 
 ```bash
-python contact_book.py
+python main.py
 ```
 
 > Make sure the directory `contact_book/` exists with write permissions, or the app will create the `contact_list.json` file automatically in that directory.
@@ -41,7 +41,7 @@ python contact_book.py
 ```
 contact_book/
 ├── contact_list.json   # JSON file that stores the contacts
-└── contact_book.py     # Main application script
+└── main.py     # Main application script
 ```
 
 ---
